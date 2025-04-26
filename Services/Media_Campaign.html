@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media&nbsp;Campaigns&nbsp;|&nbsp;JCL</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font-Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SzlrxWriO3w7WUz+I9XfZFccbsOQxP5c5c5c5BxZYnxTcX8ZUPD2t1KVDWQMPN+F7kycrIEvrCGWnbXw0aQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- Favicon (using JCL logo) -->
+   <link rel="icon" type="image/png" href="Images/JCL.png" sizes="32x32" />
+  <style>
+    :root{
+      --brand-red:#c41230;
+      --brand-dark:#1a1a1a;
+      --brand-light:#fafafa;
+      --text-light:#ffffff;
+      --text-dark:#262626;
+      --max-width:1200px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Montserrat',sans-serif;font-size:16px;line-height:1.75;color:var(--text-dark);background:var(--brand-light);letter-spacing:.02em;
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    main.wrapper p,.pwc-bullets li,.hero-overlay p{text-align:justify;hyphens:auto;}
+    header.navbar{background:#fff;position:sticky;top:0;z-index:200;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+    .nav-container{max-width:var(--max-width);margin:auto;display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:.5rem;font-weight:700;font-size:1.3rem;color:var(--brand-red)}
+    .brand img{height:48px}
+    .return-link{width:100%;margin:.25rem 0 0 3.5rem;font-size:.85rem;font-weight:500}
+    .return-link a{border-bottom:1px solid transparent;transition:.3s}
+    .return-link a:hover{border-color:var(--brand-red)}
+    .menu-toggle{display:none;font-size:1.75rem;cursor:pointer}
+    /* HERO */
+    .hero{height:64vh;min-height:420px;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+    .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}
+    .hero-overlay{position:relative;z-index:1;background:rgba(0,0,0,.7);color:var(--text-light);padding:2rem 2.5rem;max-width:520px;margin:0 0 3rem 3rem;border-radius:4px}
+    .hero-overlay h1{font-size:2rem;font-weight:700;margin-bottom:.7rem}
+    .hero-overlay p{font-size:.95rem;font-weight:300}
+    /* WRAPPER */
+    .wrapper{width:min(92%,var(--max-width));margin:auto;padding:3rem 0 0}
+    .pwc-bullets{list-style:none;margin-left:1.2rem}
+    .pwc-bullets li{position:relative;padding-left:1.2rem;margin-bottom:.8rem;font-weight:500;font-size:.95rem}
+    .pwc-bullets li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:var(--brand-red)}
+    /* CTA */
+    .cta-strip{margin-top:3.5rem;background:var(--brand-red);color:var(--text-light);padding:1.8rem .5rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:.8rem;font-weight:600;font-size:1rem}
+    /* CONTACTS */
+    .contact-box{display:flex;flex-wrap:wrap;gap:2.5rem;margin:3rem 0 4rem}
+    .contact-card{display:flex;gap:1rem;align-items:flex-start;background:#fff;padding:1.25rem 1.5rem;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.08);flex:1 1 280px}
+    .contact-card img.profile{width:64px;height:64px;border-radius:50%;object-fit:cover;flex-shrink:0}
+    .contact-details{flex:1}
+    .contact-details h3{margin-bottom:.35rem;font-size:1rem;font-weight:600}
+    .icon-links{display:flex;gap:.75rem;margin-top:.6rem}
+    .icon-links img{width:24px;height:24px;object-fit:contain;filter:grayscale(1);transition:.25s}
+    .icon-links img:hover{filter:grayscale(0);transform:scale(1.1)}
+    /* FOOTER */
+    footer{background:#262626;color:#eee;margin-top:4rem;font-size:.9rem;padding:3rem 0 5rem}
+    .footer-inner{max-width:var(--max-width);margin:auto;display:flex;flex-direction:column;gap:1.5rem;padding:0 1rem}
+    .footer-inner p{text-align:center}
+    /* RESPONSIVE */
+    @media(max-width:768px){
+      .menu-toggle{display:block}
+      .return-link{margin-left:1rem}
+      .contact-box{flex-direction:column;align-items:center}
+      .contact-card{flex-direction:column;align-items:center;text-align:center}
+      .icon-links{justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="nav-container">
+    <a href="#" class="brand"><img src="Images/JCL.png" alt="JCL Logo" />Jessin Consultancy Limited</a>
+    <span class="menu-toggle" id="menuToggle">&#9776;</span>
+  </div>
+  <div class="return-link"><a href="../index.html">&larr; Return › JCL</a></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="bg" src="Images/Media.jpg" alt="Media Campaigns background" />
+  <div class="hero-overlay">
+    <h1>Media Campaigns</h1>
+    <p>Strategic initiatives that amplify your brand, reach the right audiences, and drive measurable results.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="wrapper">
+  <section>
+    <p>In an increasingly connected world, visibility, relevance, and engagement are critical to business success. Our <strong>Media Campaigns</strong> service helps organisations strategically craft, manage, and execute impactful media initiatives that reach target audiences, amplify brand messages, and deliver tangible outcomes.</p>
+    <p>We combine creativity, strategy, and data‑driven insights to design campaigns that not only raise awareness but also influence perceptions, build trust, and inspire action.</p>
+
+    <h2 style="font-size:1.25rem;margin:1.5rem 0 1rem;font-weight:600">How We Can Help</h2>
+    <p>We provide end‑to‑end media campaign solutions tailored to each client’s unique goals and audience needs. Whether launching a new product, strengthening brand reputation, raising public awareness, or managing a sensitive communication initiative, we ensure your message is delivered with precision and impact across the right channels.</p>
+
+    <h3 style="font-size:1.15rem;margin:1.25rem 0 .8rem;font-weight:600">Our media campaign services help organisations:</h3>
+    <ul class="pwc-bullets">
+      <li>Increase brand visibility and public recognition.</li>
+      <li>Communicate effectively with target audiences across traditional and digital platforms.</li>
+      <li>Drive engagement, loyalty, and advocacy among customers, stakeholders, and communities.</li>
+      <li>Support strategic initiatives such as product launches, public relations efforts, crisis communications, or CSR programs.</li>
+      <li>Measure, monitor, and continuously improve the effectiveness of communication strategies.</li>
+    </ul>
+
+    <h3 style="font-size:1.15rem;margin:1.5rem 0 .8rem;font-weight:600">Our Media Campaign Services Include:</h3>
+    <ul class="pwc-bullets">
+      <li><strong>Campaign Strategy Development:</strong> Designing comprehensive media strategies based on objectives, audience analysis, and market insights.</li>
+      <li><strong>Content Creation and Storytelling:</strong> Crafting compelling narratives, press releases, video content, graphics, and articles that resonate with audiences and reinforce brand identity.</li>
+      <li><strong>Media Planning and Buying:</strong> Identifying optimal blends of print, broadcast, digital, outdoor, and social channels and negotiating buys to maximise reach and efficiency.</li>
+      <li><strong>Digital and Social Media Campaigns:</strong> Executing integrated campaigns on platforms such as Facebook, LinkedIn, Instagram, Twitter, and Google Ads to drive online engagement and lead generation.</li>
+      <li><strong>Influencer and Partnership Campaigns:</strong> Collaborating with key opinion leaders, influencers, and strategic partners to broaden reach and credibility.</li>
+      <li><strong>Public Relations and Media Engagement:</strong> Managing media relations, securing editorial placements, organising press events, and nurturing relationships with journalists.</li>
+      <li><strong>Campaign Monitoring, Analytics, and Reporting:</strong> Tracking performance in real time, analysing key metrics, and delivering actionable insights to refine strategies and demonstrate ROI.</li>
+    </ul>
+
+    <p style="margin-top:1.5rem">Every campaign we deliver is rooted in a deep understanding of the client’s brand, target audience, market positioning, and long‑term goals. Successful media campaigns require not just creativity but strategic discipline and relentless focus on measurable outcomes.</p>
+
+    <h3 style="font-size:1.15rem;margin:1.5rem 0 .8rem;font-weight:600">Why Effective Media Campaigns Matter</h3>
+    <p>Today’s audiences are overwhelmed with information. To stand out, businesses must deliver consistent, authentic, and impactful messages across multiple touchpoints. Well‑executed media campaigns:</p>
+    <ul class="pwc-bullets">
+      <li>Build brand credibility and trust with stakeholders.</li>
+      <li>Enhance public awareness and understanding of your products, services, or mission.</li>
+      <li>Support strategic goals like sales growth, community engagement, or reputation management.</li>
+      <li>Enable rapid response to market changes, crises, or emerging opportunities.</li>
+      <li>Drive competitive advantage in an increasingly crowded media landscape.</li>
+    </ul>
+    <p>Across Zambia and beyond, we help businesses, government agencies, and non‑profit organisations plan and execute media campaigns that raise profiles, shape narratives, and deliver meaningful engagement at every level.</p>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-strip"><i class="fas fa-phone"></i><span>Contact&nbsp;Us Today</span></div>
+
+  <!-- CONTACT CARDS -->
+  <section class="contact-box">
+    <div class="contact-card">
+      <img class="profile" src="Images/Timbo (2).png" alt="Timothy Simaundu" />
+      <div class="contact-details">
+        <h3>Timothy Simaundu</h3>
+        <p>Partner | Media Campaigns</p>
+        <div class="icon-links">
+          <a href="https://wa.me/260766809889" target="_blank" aria-label="WhatsApp Timothy"><img src="Icons/W (1).jpeg" alt="WhatsApp icon" /></a>
+          <a href="mailto:schibbela@yahoo.com" aria-label="Email Timothy"><img src="Icons/M.png" alt="Email icon" /></a>
+          <a href="https://www.linkedin.com/in/simaundu-chibbela-400616124/" target="_blank" aria-label="LinkedIn Timothy"><img src="Icons/L.png" alt="LinkedIn icon" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-card">
+      <img class="profile" src="Images/Simz.jpg" alt="Simon John" />
+      <div class="contact-details">
+        <h3>Simon John</h3>
+        <p>Partner | Media Campaigns</p>
+        <div class="icon-links">
+          <a href="https://wa.me/260976913843" target="_blank" aria-label="WhatsApp Simon"><img src="Icons/W (1).jpeg" alt="WhatsApp icon" /></a>
+          <a href="mailto:simonjohnmwanza@gmail.com" aria-label="Email Simon"><img src="Icons/M.png" alt="Email icon" /></a>
+          <a href="https://www.linkedin.com/in/simon-john-m-a87a0b1b7/" target="_blank" aria-label="LinkedIn Simon"><img src="Icons/L.png" alt="LinkedIn icon" /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="brand" style="gap:.5rem;color:#fff"><img src="../Images/JCL.png" alt="JCL Logo" style="height:40px" />Jessin Consultancy Limited</a>
+    <p>&copy; 2015 – <span id="currentYear"></span> JCL. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+  /* --- Mobile nav toggle (if navList is present) --- */
+  const menuToggle = document.getElementById('menuToggle');
+  const navList = document.getElementById('navList');
+  if(menuToggle && navList){
+    menuToggle.addEventListener('click', ()=> navList.classList.toggle('open'));
+    document.addEventListener('click', e=>{
+      if(!menuToggle.contains(e.target) && !navList.contains(e.target)) navList.classList.remove('open');
+    });
+  }
+  /* --- Dynamic footer year --- */
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
+
