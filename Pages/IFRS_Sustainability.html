@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fostering a Greener Future – IFRS S1 & S2 in Zambia</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet" />
+
+  <!-- Font‑Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SzlrxWriO3w7WUz+I9XfZFccbsOQxP5c5c5c5BxZYnxTcX8ZUPD2t1KVDWQMPN+F7kycrIEvrCGWnbXw0aQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <!-- Favicon (using JCL logo) -->
+   <link rel="icon" type="image/png" href="Images/JCL.png" sizes="32x32" />
+  <style>
+    /* ─── Root Colours & Utilities ───────────────────────────────────────── */
+    :root{
+      --primary:#0AA541;  /* Green accent for sustainability */
+      --accent :#FFB400;  /* Warm yellow accent */
+      --dark   :#212121;
+      --light  :#F9F9F9;
+      --grey   :#666;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Montserrat',sans-serif;line-height:1.6;color:var(--dark);background:var(--light);scroll-behavior:smooth}
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(92%,1200px);margin-inline:auto}
+    .btn{display:inline-block;padding:.8rem 2rem;border-radius:2rem;background:var(--primary);color:#fff;font-weight:600;transition:background .3s}
+    .btn:hover{background:#087a32}
+
+    /* ─── Header ────────────────────────────────────────────────────────── */
+    header.primary-header{position:fixed;inset:0 0 auto 0;background:#000;z-index:999;box-shadow:0 2px 6px rgba(0,0,0,.25)}
+    .primary-header .nav-container{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 0}
+    .logo{font-weight:800;letter-spacing:.5px;color:var(--primary);font-size:1.25rem;white-space:nowrap}
+    nav.primary-nav ul{list-style:none;display:flex;gap:2rem;font-weight:600}
+    nav.primary-nav li a{color:#fff;opacity:.8}
+    nav.primary-nav li a:hover,nav.primary-nav li a.active{opacity:1}
+    .hamburger{display:none;font-size:1.5rem;color:#fff;cursor:pointer}
+    @media(max-width:768px){
+      nav.primary-nav ul{position:fixed;inset:0 0 0 40%;flex-direction:column;padding-top:5rem;background:#000;transform:translateX(100%);transition:transform .4s ease}
+      nav.primary-nav ul.open{transform:translateX(0)}
+      .hamburger{display:block}
+    }
+
+    /* ─── Hero ──────────────────────────────────────────────────────────── */
+    .hero{height:100vh;background:url('https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;position:relative;color:#fff;display:flex;align-items:center;justify-content:center;text-align:center}
+    .hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55);z-index:0}
+    .hero-content{position:relative;z-index:1;max-width:740px;padding:0 1rem}
+    .hero h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:800;margin-bottom:1rem}
+    .hero p{font-size:1.15rem}
+
+    /* ─── Sections Base ─────────────────────────────────────────────────── */
+    section.section{padding:5.5rem 0;opacity:0;transform:translateY(40px);transition:opacity .6s ease,transform .6s ease}
+    section.section.show{opacity:1;transform:none}
+    section.section:nth-of-type(even){background:#fff}
+    h2.section-title{text-align:center;font-size:2.1rem;color:var(--primary);margin-bottom:1rem}
+    .section-subtitle{text-align:center;max-width:600px;margin:.4rem auto 3rem;color:var(--grey)}
+
+    /* ─── Grid / Cards ─────────────────────────────────────────────────── */
+    .grid{display:grid;gap:2rem}
+    @media(min-width:768px){.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}}
+    .card{background:#fff;border-radius:.5rem;padding:2rem;box-shadow:0 2px 8px rgba(0,0,0,.05);text-align:center}
+    .card i{font-size:2.6rem;margin-bottom:1rem;color:var(--primary)}
+    .progress-wrapper{margin:1rem 0}
+    .progress-label{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:.3rem}
+    .progress-bar{height:8px;background:var(--light);border-radius:3px;overflow:hidden}
+    .progress-bar span{display:block;height:100%;background:var(--primary)}
+
+    /* ─── Download Banner ─────────────────────────────────────────────── */
+    .download-banner{background:var(--primary);color:#fff;text-align:center;padding:3rem 1rem}
+    .download-banner .download-btn{display:inline-flex;align-items:center;gap:.6rem;font-size:1.1rem;font-weight:600;border:2px solid #fff;padding:.9rem 2rem;border-radius:2rem;transition:background .3s,color .3s}
+    .download-banner .download-btn:hover{background:#fff;color:var(--primary)}
+
+    /* ─── Get in Touch Panel ───────────────────────────────────────────── */
+    .get-in-touch{position:fixed;left:0;right:0;bottom:0;background:var(--accent);color:#000;transition:transform .4s ease;box-shadow:0 -2px 6px rgba(0,0,0,.25)}
+    .get-in-touch.collapsed{transform:translateY(calc(100% - 48px))}
+    .get-in-touch-header{display:flex;align-items:center;gap:.5rem;justify-content:center;font-weight:700;cursor:pointer;padding:.9rem 1rem}
+    .get-in-touch-header i{transition:transform .3s}
+    .get-in-touch-header.open i{transform:rotate(180deg)}
+    .get-in-touch-body{padding:2rem 1rem 3rem;max-height:55vh;overflow-y:auto}
+    .contacts{display:grid;gap:1.5rem}
+    @media(min-width:640px){.contacts{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}}
+    .contact-card{display:flex;gap:.9rem;align-items:flex-start}
+    .contact-card img{width:60px;height:60px;border-radius:50%;object-fit:cover}
+
+    /* ─── Footer ───────────────────────────────────────────────────────── */
+    footer.site-footer{background:var(--dark);color:#fff;padding:3rem 0 6rem;text-align:center}
+    .socials a{margin:0 .4rem;font-size:1.3rem}
+  </style>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="primary-header">
+    <div class="container nav-container">
+      <a href="#intro" class="logo">IFRS S1 & S2 Zambia</a>
+      <nav class="primary-nav">
+        <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+        <ul id="nav-list">
+          <li><a href="#intro">Intro</a></li>
+          <li><a href="#ifrs">IFRS Standards</a></li>
+          <li><a href="#budget">Budget 2025</a></li>
+          <li><a href="#risks">Investment Risks</a></li>
+          <li><a href="#compliance">Compliance</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#future">Future</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <section class="hero" id="intro">
+    <div class="hero-content">
+      <h1>Fostering a Greener Future in Zambia</h1>
+      <p>Aligning with IFRS S1 & S2 to unlock sustainable growth and attract global capital—powered by the historic <span style="font-weight:600;">K217.1 billion</span> 2025 budget.</p>
+    </div>
+  </section>
+
+  <!-- ── IFRS Overview ──────────────────────────────────────────────────── -->
+  <section class="section" id="ifrs">
+    <div class="container">
+      <h2 class="section-title">Why IFRS S1 & IFRS S2 Matter</h2>
+      <p class="section-subtitle">Transparent sustainability and climate‑related disclosures build investor confidence and support Zambia’s energy transition.</p>
+
+      <div class="grid grid-3">
+        <div class="card"><i class="fas fa-seedling"></i><h3>IFRS S1</h3><p>Highlights sustainability risks & opportunities—vital for mining, agriculture, and renewable sectors.</p></div>
+        <div class="card"><i class="fas fa-cloud-sun"></i><h3>IFRS S2</h3><p>Mandates climate‑related metrics such as emissions, forging a path toward net‑zero goals.</p></div>
+        <div class="card"><i class="fas fa-handshake"></i><h3>Global Capital</h3><p>Clear reporting standards make Zambian firms investable for ESG‑focused funds.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Budget 2025 ────────────────────────────────────────────────────── -->
+  <section class="section" id="budget">
+    <div class="container">
+      <h2 class="section-title">Zambia’s Record‑Breaking 2025 Budget</h2>
+      <p class="section-subtitle">K217.1 billion with <strong>80.2%</strong> financed by domestic revenue—fuel for sustainable development.</p>
+
+      <div class="grid grid-2">
+        <div><img src="https://img.freepik.com/free-photo/solar-system-solar-panels-near-house_169016-20973.jpg?t=st=1745509386~exp=1745512986~hmac=276346a91ecda7bd6646c918c0fa5702eb48b4a92c55c5a5ae35a1f10696250b&w=900" alt="Solar panels in rural Zambia"></div>
+        <div>
+          <h3>Growth Priorities</h3>
+          <ul>
+            <li>GDP growth target <span style="font-weight:600;">6.6%</span></li>
+            <li>Focus sectors: Renewable Energy, Agriculture, Mining & Infrastructure</li>
+            <li>Projected surplus: <span style="font-weight:600;">K11.08 billion</span></li>
+          </ul>
+          <p style="margin-top:1rem">Integrating IFRS S1 & S2 across these sectors will channel budget resources into transparent, impact‑driven projects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Investment Risks ──────────────────────────────────────────────── -->
+  <section class="section" id="risks">
+    <div class="container">
+      <h2 class="section-title">Managing Green Investment Risks</h2>
+      <p class="section-subtitle">Robust disclosures mitigate exposure and reassure investors.</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Hydro‑Dependence</h3>
+          <div class="progress-bar" style="margin:1rem 0;"><span style="width:60%"></span></div>
+          <p>Droughts slash hydro output—renewables must reduce reliance by <strong>15%</strong> to cut projected losses from $4 m to $3.4 m.</p>
+        </div>
+        <div class="card">
+          <h3>Currency Fluctuations</h3>
+          <div class="progress-bar" style="margin:1rem 0;"><span style="width:30%"></span></div>
+          <p>Transparent hedging disclosures instill confidence among foreign investors.</p>
+        </div>
+        <div class="card">
+          <h3>Policy Alignment</h3>
+          <div class="progress-bar" style="margin:1rem 0;"><span style="width:20%"></span></div>
+          <p>Failure to meet IFRS S2 metrics can trigger compliance penalties and financing delays.</p>
+        </div>
+        <div class="card">
+          <h3>Supply‑Chain Emissions</h3>
+          <div class="progress-bar" style="margin:1rem 0;"><span style="width:25%"></span></div>
+          <p>Scope 3 reporting highlights areas for reduction, ensuring resilience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Compliance & Forensic Accounting ─────────────────────────────── -->
+  <section class="section" id="compliance">
+    <div class="container">
+      <h2 class="section-title">Forensic Accounting for Compliance</h2>
+      <p class="section-subtitle">Assuring transparency in sustainability pledges.</p>
+
+      <div class="grid grid-2">
+        <div>
+          <h3>Audit in Action</h3>
+          <p>If a firm pledges a <strong>20% emission cut</strong> over five years, forensic audits track quarterly performance and recommend corrective measures.</p>
+          <ul style="margin-left:1.2rem;margin-top:.8rem;">
+            <li>Data Analytics identify variances early.</li>
+            <li>Remediation plans redirect budget to renewable assets.</li>
+            <li>Continuous reporting meets IFRS S2 timeline.</li>
+          </ul>
+        </div>
+        <div><img src="https://www.adecesg.com/wp-content/uploads/2024/03/20231227_ESG_ISSBIFRS_Inline-Image.png" alt="Auditor analysing sustainability data"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Benefits ──────────────────────────────────────────────────────── -->
+  <section class="section" id="benefits">
+    <div class="container">
+      <h2 class="section-title">Key Benefits for Zambia</h2>
+
+      <div class="grid grid-3">
+        <div class="card"><i class="fas fa-leaf"></i><h3>Green Investment</h3><p>IFRS alignment opens the door to ESG funds and climate finance.</p></div>
+        <div class="card"><i class="fas fa-briefcase"></i><h3>Job Creation</h3><p>Renewable projects generate skilled employment across provinces.</p></div>
+        <div class="card"><i class="fas fa-users"></i><h3>Community Impact</h3><p>Local micro‑grids power schools & clinics—audits ensure funds reach projects.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Future ─────────────────────────────────────────────────────────── -->
+  <section class="section" id="future">
+    <div class="container">
+      <h2 class="section-title">Navigating the Future</h2>
+      <p class="section-subtitle">With IFRS S1 & S2, Zambia can balance economic growth and sustainability—securing a resilient, low‑carbon future.</p>
+
+      <div class="grid grid-2">
+        <div>
+          <h3>Call to Action</h3>
+          <p>Private‑sector leaders must embed IFRS disclosures into strategy, collaborate with regulators, and invest in up‑skilling finance teams.</p>
+        </div>
+        <div>
+          <h3>Government Role</h3>
+          <p>Streamline green‑bond frameworks and offer tax incentives for verified emission‑reduction projects.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:3rem;">Key Next Steps</h3>
+      <ul style="margin-left:1.2rem;">
+        <li>Launch nationwide AI‑powered sustainability data hubs.</li>
+        <li>Expand rural broadband to enable digital reporting.</li>
+        <li>Foster public‑private taskforces to align investment with IFRS metrics.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Download Banner (CTA) ─────────────────────────────────────────── -->
+  <section class="download-banner">
+    <div class="container">
+      <a href="#" class="download-btn"><i class="fas fa-download"></i> Download full insight (PDF)</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2015 – 2025 JCL. All rights reserved.</p>
+      <p style="margin:1.2rem 0;line-height:1.4;max-width:600px;margin-inline:auto;font-size:.9rem;">
+       </p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ── Get in Touch (collapsible panel) ──────────────────────────────── -->
+  <aside class="get-in-touch collapsed" id="get-in-touch">
+    <div class="get-in-touch-header" id="get-in-touch-toggle">
+      <i class="fas fa-chevron-up"></i>
+      <span>Get in touch</span>
+    </div>
+    <div class="get-in-touch-body">
+      <div class="container contacts">
+        <div class="contact-card">
+          <img src="https://media.licdn.com/dms/image/v2/D4D03AQHnLSqorZ0Lbw/profile-displayphoto-shrink_800_800/B4DZPFZ12PGgAc-/0/1734183706837?e=1750896000&v=beta&t=w5d7zFLu9PnBljfT3_S8LV-kidp1OrJtbHkocPGrrnM" alt="Simon John" />
+          <div>
+            <h4>Simon John</h4><p>Business Forensicist</p>
+            <p>Tel: +260 976 913 843</p>
+            <a href="mailto:simonjohnmwanza@gmail.com">Email</a> • <a href="https://www.linkedin.com/in/simon-john-m-a87a0b1b7/">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- ── JavaScript ────────────────────────────────────────────────────── -->
+  <script>
+    /* Mobile Nav Toggle */
+    const hamburger = document.getElementById('hamburger');
+    const navList   = document.getElementById('nav-list');
+    hamburger.addEventListener('click', () => navList.classList.toggle('open'));
+
+    /* Section Scroll Reveal */
+    const sections = document.querySelectorAll('section.section');
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    },{threshold:.2});
+    sections.forEach(sec=>observer.observe(sec));
+
+    /* Simple Scroll-Spy for Nav Highlight */
+    const navLinks=[...document.querySelectorAll('#nav-list a')];
+    window.addEventListener('scroll',()=>{
+      const fromTop=window.scrollY+120; // offset for header
+      navLinks.forEach(link=>{
+        const section=document.querySelector(link.hash);
+        if(!section) return;
+        if(section.offsetTop<=fromTop && section.offsetTop+section.offsetHeight>fromTop){
+          link.classList.add('active');
+        }else{
+          link.classList.remove('active');
+        }
+      });
+    });
+
+    /* Get in Touch Collapse */
+    const getInTouch=document.getElementById('get-in-touch');
+    const getInTouchToggle=document.getElementById('get-in-touch-toggle');
+    getInTouchToggle.addEventListener('click',()=>{
+      getInTouch.classList.toggle('collapsed');
+      getInTouchToggle.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
+
