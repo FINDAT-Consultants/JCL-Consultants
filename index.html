@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JCL Zambia&nbsp;|&nbsp;Homepage</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /*  ======================================================================
+        ROOT & RESET
+        ====================================================================== */
+    :root {
+      --brand-red: #c41230;
+      --dark: #1a1a1a;
+      --light: #fafafa;
+      --gray: #606060;
+      --max-width: 1200px;
+    }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Inter", Arial, Helvetica, sans-serif;
+    }
+    body {
+      background: var(--light);
+      color: var(--dark);
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /*  ======================================================================
+        NAVBAR
+        ====================================================================== */
+    header {
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+    .nav-container {
+      max-width: var(--max-width);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--brand-red);
+    }
+    .brand img {
+      height: 60px;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      position: relative;
+    }
+    nav li {
+      position: relative;
+      cursor: pointer;
+      padding: 0.5rem 0;
+    }
+    nav li::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 0;
+      background: var(--brand-red);
+      left: 0;
+      bottom: -2px;
+      transition: 0.3s;
+    }
+    nav li:hover::after {
+      width: 100%;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.75rem;
+      cursor: pointer;
+    }
+
+    /*  ======================================================================
+        MEGA-OVERLAYS
+        ====================================================================== */
+    .mega-overlay {
+      display: none;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: #222;
+      color: #fff;
+      padding: 2.5rem 1rem;
+      z-index: 150;
+    }
+    .mega-overlay.active {
+      display: block;
+    }
+    .mega-inner {
+      max-width: var(--max-width);
+      margin: auto;
+      display: flex;
+      gap: 3rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .mega-col {
+      min-width: 220px;
+      flex: 1;
+    }
+    .mega-col h3 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .mega-col ul {
+      list-style: none;
+      line-height: 2;
+    }
+    .mega-col a {
+      color: #fff;
+      font-weight: 300;
+      font-size: 0.95rem;
+    }
+    .mega-col a:hover {
+      text-decoration: underline;
+    }
+    .mega-feature {
+      max-width: 260px;
+    }
+    .mega-feature img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .close-btn:hover {
+      color: var(--brand-red);
+    }
+
+    /* make featured item clickable & accessible */
+    .mega-feature .feature-link {
+      display: block;
+      color: #fff;
+    }
+    .mega-feature .feature-link span {
+      display: block;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    .mega-feature .feature-link:hover span {
+      text-decoration: underline;
+    }
+
+    /*  ======================================================================
+        SUB-DROPDOWNS (ABOUT-US ITEMS)
+        ====================================================================== */
+    .sub-parent {
+      position: relative;
+    }
+    .sub-drop {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      color: var(--dark);
+      min-width: 240px;
+      padding: 1rem 1.25rem;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      z-index: 25; /* sits above overlay content */
+    }
+    .sub-parent:hover .sub-drop {
+      transform: scaleY(1);
+    }
+    .sub-drop ul {
+      list-style: disc inside;
+      line-height: 1.8;
+    }
+    .sub-drop ul li a {
+      color: var(--dark);
+    }
+    .sub-drop ul li a:hover {
+      text-decoration: underline;
+      color: var(--brand-red);
+    }
+    /* Contact form inside dropdown */
+    .sub-drop form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .sub-drop input,
+    .sub-drop textarea {
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    .sub-drop textarea {
+      resize: vertical;
+      min-height: 70px;
+    }
+    .sub-drop button {
+      background: var(--brand-red);
+      color: #fff;
+      border: none;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .sub-drop button:hover {
+      background: #a50f26;
+    }
+
+    /* Horizontal layout for About‑us first‑level links */
+    #aboutMenu .mega-col ul {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    /*  ======================================================================
+        HERO
+        ====================================================================== */
+    .hero {
+      position: relative;
+      height: 60vh;
+      min-height: 420px;
+      background: url("https://picsum.photos/2000/800?random=10") center/cover no-repeat;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-width);
+      margin: auto;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 1rem;
+      color: #fff;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      max-width: 700px;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .tag-btn {
+      display: inline-block;
+      background: var(--dark);
+      padding: 0.45rem 1.25rem;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--brand-red);
+      padding: 0.75rem 1.75rem;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: 0.3s;
+    }
+    .cta-btn:hover {
+      background: var(--dark);
+      color: #fff;
+    }
+
+    /*  ======================================================================
+        GENERIC SECTION STYLES
+        ====================================================================== */
+    section {
+      padding: 4rem 1rem;
+    }
+    .section-inner {
+      max-width: var(--max-width);
+      margin: auto;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+    }
+
+    /*  ======================================================================
+        FEATURED CARDS
+        ====================================================================== */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .card-content p {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      flex: 1;
+    }
+    .btn {
+      align-self: flex-start;
+      padding: 0.5rem 1rem;
+      background: var(--brand-red);
+      color: #fff;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /*  ======================================================================
+        BLOG INSIGHTS
+        ====================================================================== */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .blog-card {
+      display: flex;
+      gap: 1rem;
+      cursor: pointer;
+    }
+    .blog-card img {
+      width: 140px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    .blog-info h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .blog-info span {
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+
+    /*  ======================================================================
+        SLIDE PANEL / STATUS VIEW
+        ====================================================================== */
+    .slide-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 400;
+      transform: translateX(-100%);
+      transition: transform 0.45s ease;
+      overflow: hidden; /* lock background scroll */
+      color: #fff;
+    }
+    .slide-panel.open {
+      transform: translateX(0);
+    }
+    .slide-panel .back-btn {
+      position: absolute;
+      top: 18px;
+      left: 14px;
+      z-index: 410;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .status-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .status-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .progress-wrap {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      gap: 4px;
+      z-index: 405;
+    }
+    .progress-bar {
+      position: relative;
+      flex: 1;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      border-radius: 1.5px;
+    }
+    .progress-bar .fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: #fff;
+      animation: statusFill 4s linear forwards;
+    }
+    @keyframes statusFill {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+    .info-box {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 350px;
+      max-width: 80%;
+      background: #fff;
+      color: var(--dark);
+      padding: 3.5rem 1.5rem 2rem;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.45s ease;
+    }
+    .slide-panel.open .info-box {
+      transform: translateX(0);
+    }
+    .info-box h2 {
+      font-size: 1.55rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .info-box .date {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+    .info-box p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    /*  ======================================================================
+        FOOTER
+        ====================================================================== */
+    footer {
+      background: #262626;
+      color: #eee;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+    .follow-bar {
+      background: #1c1c1c;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+    }
+    .follow-bar a img {
+      width: 22px;
+      height: 22px;
+      margin: 0 0.25rem;
+      vertical-align: middle;
+    }
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 2rem;
+      padding: 3rem 1rem;
+    }
+    .footer-col h5 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .footer-col ul {
+      list-style: none;
+      line-height: 1.8;
+    }
+    .footer-col a {
+      color: #ddd;
+    }
+    .footer-col a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .copy {
+      border-top: 1px solid #444;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+
+    /*  ======================================================================
+        RESPONSIVE
+        ====================================================================== */
+    @media (max-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #fff;
+        width: 240px;
+        flex-direction: column;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: max-height 0.3s;
+      }
+      nav ul.open {
+        max-height: 400px;
+      }
+      nav li {
+        padding-left: 1rem;
+      }
+      .menu-toggle {
+        display: block;
+      }
+      .mega-inner {
+        flex-direction: column;
+      }
+      .mega-feature {
+        max-width: 100%;
+      }
+      /* ensure sub-dropdown stretches full width on mobile */
+      .sub-drop {
+        position: static;
+        transform: scaleY(1) !important;
+        box-shadow: none;
+        padding-left: 0;
+      }
+      .info-box {
+        width: 100%;
+        max-width: 100%;
+        padding: 3.5rem 1rem 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!--  ======================================================================
+        NAVBAR
+        ====================================================================== -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <img src="Images/JCL.png" alt="JCL Logo" />
+        <span>| Jessin Consultancy Limited</span>
+      </a>
+      <span class="menu-toggle" id="menuToggle">&#9776;</span>
+      <nav>
+        <ul id="navList">
+          <li class="menu-link" data-menu="industriesMenu">Industries</li>
+          <li class="menu-link" data-menu="servicesMenu">Services</li>
+          <li class="menu-link" data-menu="aboutMenu">About&nbsp;us</li>
+          <li class="menu-link" data-menu="careersMenu">Careers</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!--  ======================================================================
+        MEGA MENUS
+        ====================================================================== -->
+  <div id="industriesMenu" class="mega-overlay">
+    <span class="close-btn">&times;</span>
+    <div class="mega-inner">
+      <div class="mega-col">
+        <h3>Industries</h3>
+        <ul>
+          <li><a href="Industries/NGO.html">Non-Governmental Organizations (NGO) sector</a></li>
+          <li><a href="Industries/Government.html">Government and public sector</a></li>
+          <li><a href="Industries/Financial.html">Financial services</a></li>
+          <li><a href="Industries/Energy.html">Consumer and Other Industries</a></li>
+        </ul>
+      </div>
+
+      <!-- updated, fully clickable feature -->
+      <div class="mega-feature">
+        <h3>Featured</h3>
+        <a href="Pages/impact.html" class="feature-link">
+          <img src="Images/Africa.jpg" alt="Impact of AI by 2030" />
+          <span>Impact of AI by 2030</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="servicesMenu" class="mega-overlay">
+    <span class="close-btn">&times;</span>
+    <div class="mega-inner">
+      <div class="mega-col">
+        <h3>Services</h3>
+        <ul>
+          <li>
+            <a href="Services/Advisory.html">
+              Advisory Services =&gt; Research,&nbsp;I.T &amp; Forensics,&nbsp;Compliance,&nbsp;Risk,
+              Project Delivery,&nbsp;Finance &amp;&nbsp;Management
+            </a>
+          </li>
+          <li><a href="Services/Strategy_Assurance.html">Strategy &amp; Assurance Planning</a></li>
+          <li><a href="Services/Systems_Audit.html">Systems-Based Audit</a></li>
+          <li><a href="Services/Media_Campaign.html">Media Campaign</a></li>
+          <li><a href="Services/Staff_Training.html">Staff Training</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--  ABOUT-US MEGA  -->
+  <div id="aboutMenu" class="mega-overlay">
+    <span class="close-btn">&times;</span>
+    <div class="mega-inner">
+      <div class="mega-col">
+        <h3>About&nbsp;us</h3>
+        <ul>
+          <!-- BUSINESS PORTFOLIOS -->
+          <li class="sub-parent">
+            <a href="">Business Portfolios</a>
+            <div class="sub-drop">
+              <ul>
+                <li><a href="https://jessin-farms.netlify.app/" target="_blank" rel="noopener">Jessin &nbsp;Farms</a></li>
+                <li><a href="https://findat.netlify.app/" target="_blank" rel="noopener">FINDAT &nbsp;Consultants</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- CONTACT US -->
+          <li class="sub-parent">
+            <a href="">Contact us</a>
+            <div class="sub-drop" style="min-width: 260px;">
+              <form id="contactForm">
+                <input type="text" name="consultant" placeholder="Consultant &amp; Service" required />
+                <textarea name="message" placeholder="Special message" required></textarea>
+                <input type="text" name="name" placeholder="Your name" required />
+                <button type="submit">Send via WhatsApp</button>
+              </form>
+            </div>
+          </li>
+
+          <!-- OUR OFFICES -->
+          <li class="sub-parent">
+            <a href="">Our offices</a>
+            <div class="sub-drop">
+              <strong>Zambia – Head Office</strong><br />
+              Meanwood Airport, Phase 1 Plot 178/179, Lusaka<br />
+              <br />
+              <strong>Email:</strong> jcl@gmail.com<br />
+              <strong>Phone:</strong> +260 976 913 843 / +260 766 809 889
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mega-feature">
+        <h3>Featured</h3>
+        <a href="Pages/IFRS_Sustainability.html" class="feature-link">
+          <img src="Images/Solar.jpg" alt="Zambia Budget 2025" />
+          <span>Zambia’s Record-Breaking 2025 Budget</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="careersMenu" class="mega-overlay">
+    <span class="close-btn">&times;</span>
+    <div class="mega-inner">
+      <div class="mega-col">
+        <h3>Careers</h3>
+        <ul>
+          <li><a href="">No Jobs Available</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!--  ======================================================================
+        HERO
+        ====================================================================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag-btn">First Edition</div>
+      <h1>JCL Consultants' Artificial Intelligence Survey Report</h1>
+      <a href="Pages/impact.html" class="cta-btn">Explore more here</a>
+    </div>
+  </section>
+
+  <!--  ======================================================================
+        FEATURED
+        ====================================================================== -->
+  <section id="featured">
+    <div class="section-inner">
+      <h2 class="section-title">Featured</h2>
+
+      <div class="featured-grid">
+        <div class="card">
+          <img src="Images/Solar.jpg" alt="Solar" />
+          <div class="card-content">
+            <h3>Fostering a Greener Future in Zambia</h3>
+            <p>
+              Aligning with IFRS S1 &amp; S2 standards to unlock sustainable
+              growth and attract global capital
+            </p>
+            <a class="btn" href="Pages/IFRS_Sustainability.html">Read more</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="Images/Africa.jpg" alt="Africa" />
+          <div class="card-content">
+            <h3>Global Economic Impact of AI by 2030</h3>
+            <p>Will AI Transform Economies or Widen the Gap?</p>
+            <a class="btn" href="Pages/impact.html">View report</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="Images/Hack.jpg" alt="Hack" />
+          <div class="card-content">
+            <h3>Defeating Fraud with Change &amp; Knowledge Management</h3>
+            <p>
+              Guiding people through technology transitions ensures adoption
+              and impact
+            </p>
+            <a class="btn" href="Pages/Defeating_Fraud_With_Change_Management.html">Learn more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  ======================================================================
+        BLOGS
+        ====================================================================== -->
+  <section id="blogs">
+    <div class="section-inner">
+      <h2 class="section-title">Travels &amp; Insights</h2>
+
+      <div class="blog-grid">
+        <!-- Card 1 -->
+        <div class="blog-card" data-images="Images/Collaboration.jpeg,Images/Collaboration.jpeg" data-narration="During the one-hour round-table we explored WISE’s flagship women-empowerment projects, potential donors, financial transparency and got to meet Brian Kwibisa one of the success stories for WISE Zambia. This led to drafting a high-level roadmap that JCL will transform into an implementation blueprint.">
+          <img src="Images/Collaboration.jpeg" alt="Collaboration" />
+          <div class="blog-info">
+            <span>04/04/2025 =&gt; Lusaka, Lilayi Lodge</span>
+            <h4>Discussions with the USA Director for WISE (NGO)</h4>
+            <span>The ambition is to grow beyond the current state by 2030.</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="blog-card" data-images="Images/Kaoma - STG.jpg,Images/Kaoma - STG02.jpg,Images/Kaoma - STG03.jpg" data-narration="Our facilitation centred on scenario planning. We prioritised four strategic pillars; (i) Educational Impact & Innovation, (ii) Institutional Growth & Sustainability, (iii) Strategic Partnerships & National Recognition, and (iv) Women & Community Empowerment that will anchor the 2025-2030 strategy, currently underway at JCL Headquarters.">
+          <img src="Images/Kaoma - STG.jpg" alt="Strategic Planning" />
+          <div class="blog-info">
+            <span>02/04/2025 =&gt; Kaoma, Field Visit</span>
+            <h4>Strategic Planning Discussions with WISE Zambia</h4>
+            <span>The information that emerged is currently being used by JCL to develop the 2025-2030 Strategic Plan for WISE Zambia.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--  ======================================================================
+        FOOTER
+        ====================================================================== -->
+  <footer>
+    <div class="follow-bar">
+      Follow us
+      <a href="https://www.linkedin.com/company/jcl-zm/"><img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="in" /></a>
+    </div>
+
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h5>Industries</h5>
+        <ul>
+          <li><a href="Industries/NGO.html">Non-Governmental Organizations (NGO) sector</a></li>
+          <li><a href="Industries/Government.html">Government and public sector</a></li>
+          <li><a href="Industries/Financial.html">Financial services</a></li>
+          <li><a href="Industries/Energy.html">Consumer and Other Industries</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="Services/Advisory.html">Advisory</a></li>
+          <li><a href="Services/Strategy_Assurance.html">Strategy &amp; Assurance Planning</a></li>
+          <li><a href="Services/Systems_Audit.html">Systems-Based Audit</a></li>
+          <li><a href="Services/Media_Campaign.html">Media Campaign</a></li>
+          <li><a href="Services/Staff_Training.html">Staff Training</a></li>
+        </ul>
+      </div>
+
+    
+
+      <div class="footer-col">
+        <h3>About&nbsp;us</h3>
+        <ul>
+          <!-- BUSINESS PORTFOLIOS -->
+          <li class="sub-parent">
+            <a href="">Business Portfolios</a>
+            <div class="sub-drop">
+              <ul>
+                <li><a href="https://jessin-farms.netlify.app/" target="_blank" rel="noopener">Jessin &nbsp;Farms</a></li>
+                <li><a href="https://findat.netlify.app/" target="_blank" rel="noopener">FINDAT &nbsp;Consultants</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- CONTACT US -->
+          <li class="sub-parent">
+            <a href="">Contact us</a>
+            <div class="sub-drop" style="min-width: 260px;">
+              <form id="contactForm">
+                <input type="text" name="consultant" placeholder="Consultant &amp; Service" required />
+                <textarea name="message" placeholder="Special message" required></textarea>
+                <input type="text" name="name" placeholder="Your name" required />
+                <button type="submit">Send via WhatsApp</button>
+              </form>
+            </div>
+          </li>
+
+          <!-- OUR OFFICES -->
+          <li class="sub-parent">
+            <a href="">Our offices</a>
+            <div class="sub-drop">
+              <strong>Zambia – Head Office</strong><br />
+              Meanwood Airport, Phase 1 Plot 178/179, Lusaka<br />
+              <br />
+              <strong>Email:</strong> jcl@gmail.com<br />
+              <strong>Phone:</strong> +260 976 913 843 / +260 766 809 889
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+
+    <a href="#" class="brand">
+      <img src="Images/JCL.png" alt="JCL Logo" />
+      <span>| Jessin Consultancy Limited</span>
+    </a>
+    <div class="copy">© 2015 – <span id="currentYear"></span> JCL. All rights reserved.</div>
+  </footer>
+
+  <!--  ======================================================================
+        SLIDE PANEL
+        ====================================================================== -->
+  <div id="slidePanel" class="slide-panel" aria-hidden="true">
+    <button class="back-btn" id="backBtn" aria-label="Go back">&larr;</button>
+
+    <div class="status-container" id="statusContainer">
+      <img class="status-img" id="statusImg" src="" alt="" />
+      <div class="progress-wrap" id="progressWrap"></div>
+    </div>
+
+    <div class="info-box" id="infoBox">
+      <h2 id="infoTitle"></h2>
+      <p class="date" id="infoDate"></p>
+      <p id="infoDesc"></p>
+      <p id="infoNarration"></p>
+    </div>
+  </div>
+
+  <!--  ======================================================================
+        JAVASCRIPT
+        ====================================================================== -->
+  <script>
+    /* Smooth scroll for anchors */
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+          if (window.innerWidth <= 768) {
+            document.getElementById("navList").classList.remove("open");
+          }
+        }
+      });
+    });
+
+    /* Mobile nav */
+    const menuToggle = document.getElementById("menuToggle");
+    const navList = document.getElementById("navList");
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () =>
+        navList.classList.toggle("open")
+      );
+      document.addEventListener("click", (e) => {
+        if (!menuToggle.contains(e.target) && !navList.contains(e.target)) {
+          navList.classList.remove("open");
+        }
+      });
+    }
+
+    /* Mega-menu behaviours */
+    const menuLinks = document.querySelectorAll(".menu-link");
+    const overlays = document.querySelectorAll(".mega-overlay");
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const overlay = document.getElementById(link.dataset.menu);
+        if (!overlay) return;
+        overlays.forEach((o) => o.classList.remove("active"));
+        overlay.classList.add("active");
+      });
+    });
+    overlays.forEach((overlay) => {
+      overlay
+        .querySelector(".close-btn")
+        .addEventListener("click", () => overlay.classList.remove("active"));
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove("active");
+        }
+      });
+    });
+
+    /* Slide-panel (STORY/STATUS) */
+    const blogCards = document.querySelectorAll(".blog-card");
+    const slidePanel = document.getElementById("slidePanel");
+    const backBtn = document.getElementById("backBtn");
+
+    const statusImg = document.getElementById("statusImg");
+    const progressWrap = document.getElementById("progressWrap");
+    const infoTitle = document.getElementById("infoTitle");
+    const infoDate = document.getElementById("infoDate");
+    const infoDesc = document.getElementById("infoDesc");
+    const infoNarration = document.getElementById("infoNarration");
+
+    let images = [],
+      currentIndex = 0,
+      timer = null;
+
+    blogCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        /* collect data */
+        images = (
+          card.dataset.images
+            ? card.dataset.images.split(",")
+            : [card.querySelector("img").src]
+        ).map((s) => s.trim());
+        currentIndex = 0;
+
+        infoTitle.textContent = card.querySelector("h4").textContent;
+        infoDate.textContent = card.querySelectorAll("span")[0].textContent;
+        infoDesc.textContent = card.querySelectorAll("span")[1].textContent;
+        infoNarration.textContent = card.dataset.narration || "";
+
+        /* build progress bars */
+        progressWrap.innerHTML = "";
+        images.forEach((_, i) => {
+          const bar = document.createElement("div");
+          bar.className = "progress-bar";
+          bar.innerHTML = '<div class="fill"></div>';
+          if (i < currentIndex) bar.querySelector(".fill").style.width = "100%";
+          if (i > currentIndex) bar.querySelector(".fill").style.width = "0";
+          progressWrap.appendChild(bar);
+        });
+
+        slidePanel.classList.add("open");
+        slidePanel.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+        showImage(currentIndex);
+      });
+    });
+
+    function showImage(idx) {
+      statusImg.src = images[idx];
+      /* reset bars */
+      const bars = document.querySelectorAll(".progress-bar .fill");
+      bars.forEach((fill, i) => {
+        fill.style.animation = "none";
+        void fill.offsetHeight; /* force reflow */
+        if (i < idx) {
+          fill.style.width = "100%";
+        } else if (i === idx) {
+          fill.style.width = "0";
+          fill.style.animation = "statusFill 4s linear forwards";
+        } else {
+          fill.style.width = "0";
+        }
+      });
+      clearTimeout(timer);
+      timer = setTimeout(() => nextImage(), 4000);
+    }
+    function nextImage() {
+      currentIndex++;
+      if (currentIndex >= images.length) {
+        closePanel();
+        return;
+      }
+      showImage(currentIndex);
+    }
+
+    /* click/tap to advance */
+    document
+      .getElementById("statusContainer")
+      .addEventListener("click", nextImage);
+
+    /* close */
+    backBtn.addEventListener("click", closePanel);
+    function closePanel() {
+      slidePanel.classList.remove("open");
+      slidePanel.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      clearTimeout(timer);
+    }
+
+    /* Contact-form → WhatsApp */
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const consultant = this.consultant.value.trim();
+        const message = this.message.value.trim();
+        const name = this.name.value.trim();
+        const text = encodeURIComponent(
+          `Consultant/Service: ${consultant}\nMessage: ${message}\nName: ${name}`
+        );
+        /* replace with organisation's WhatsApp number */
+        window.open(`https://wa.me/260976913843?text=${text}`);
+      });
+    }
+
+    /* --- Dynamic footer year --- */
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
