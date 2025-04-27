@@ -952,6 +952,73 @@
   }
 }
 
+@media (max-width: 768px) {
+  .status-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .info-box {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    padding: 1.5rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .info-box h2 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-box p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .status-img {
+    width: 90%;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .progress-wrap {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    gap: 4px;
+    z-index: 500;
+  }
+
+  .progress-bar {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    border-radius: 1px;
+  }
+
+  .progress-bar .fill {
+    background: #fff;
+    height: 100%;
+  }
+
+  .slide-panel .back-btn {
+    top: 12px;
+    left: 12px;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+}
+
 
 
   </style>
@@ -1229,23 +1296,23 @@
   <!--  ======================================================================
         SLIDE PANEL
         ====================================================================== -->
-  <div id="slidePanel" class="slide-panel" aria-hidden="true">
-    <button class="back-btn" id="backBtn" aria-label="Go back">&larr;</button>
-
-    <div class="status-container" id="statusContainer">
-      <div class="info-box" id="infoBox">
-        <h2 id="infoTitle"></h2>
-        <p class="date" id="infoDate"></p>
-        <p id="infoDesc"></p>
-        <p id="infoNarration"></p>
-      </div>
-    
-      <img class="status-img" id="statusImg" src="" alt="" />
-      
-      <div class="progress-wrap" id="progressWrap"></div>
-    </div>
-    
-  </div>
+        <div id="slidePanel" class="slide-panel" aria-hidden="true">
+          <button class="back-btn" id="backBtn" aria-label="Go back">&larr;</button>
+        
+          <div class="status-container" id="statusContainer">
+            <div class="info-box" id="infoBox">
+              <h2 id="infoTitle"></h2>
+              <p class="date" id="infoDate"></p>
+              <p id="infoDesc"></p>
+              <p id="infoNarration"></p>
+            </div>
+        
+            <img class="status-img" id="statusImg" src="" alt="" />
+        
+            <div class="progress-wrap" id="progressWrap"></div>
+          </div>
+        </div>
+        
 
   <!--  ======================================================================
         JAVASCRIPT
@@ -1303,85 +1370,92 @@
 
     /* Slide-panel (STORY/STATUS) */
     const blogCards = document.querySelectorAll(".blog-card");
-    const slidePanel = document.getElementById("slidePanel");
-    const backBtn = document.getElementById("backBtn");
+const slidePanel = document.getElementById("slidePanel");
+const backBtn = document.getElementById("backBtn");
 
-    const statusImg = document.getElementById("statusImg");
-    const progressWrap = document.getElementById("progressWrap");
-    const infoTitle = document.getElementById("infoTitle");
-    const infoDate = document.getElementById("infoDate");
-    const infoDesc = document.getElementById("infoDesc");
-    const infoNarration = document.getElementById("infoNarration");
+const statusImg = document.getElementById("statusImg");
+const progressWrap = document.getElementById("progressWrap");
+const infoTitle = document.getElementById("infoTitle");
+const infoDate = document.getElementById("infoDate");
+const infoDesc = document.getElementById("infoDesc");
+const infoNarration = document.getElementById("infoNarration");
 
-    let images = [],
-      currentIndex = 0,
-      timer = null;
+let images = [];
+let currentIndex = 0;
+let timer = null;
 
-    blogCards.forEach((card) => {
-      card.addEventListener("click", () => {
-        /* collect data */
-        images = (
-          card.dataset.images
-            ? card.dataset.images.split(",")
-            : [card.querySelector("img").src]
-        ).map((s) => s.trim());
-        currentIndex = 0;
+blogCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    images = (card.dataset.images ? card.dataset.images.split(",") : [card.querySelector("img").src]).map(s => s.trim());
+    currentIndex = 0;
 
-        infoTitle.textContent = card.querySelector("h4").textContent;
-        infoDate.textContent = card.querySelectorAll("span")[0].textContent;
-        infoDesc.textContent = card.querySelectorAll("span")[1].textContent;
-        infoNarration.textContent = card.dataset.narration || "";
+    infoTitle.textContent = card.querySelector("h4").textContent;
+    infoDate.textContent = card.querySelectorAll("span")[0].textContent;
+    infoDesc.textContent = card.querySelectorAll("span")[1].textContent;
+    infoNarration.textContent = card.dataset.narration || "";
 
-        /* build progress bars */
-        progressWrap.innerHTML = "";
-        images.forEach((_, i) => {
-          const bar = document.createElement("div");
-          bar.className = "progress-bar";
-          bar.innerHTML = '<div class="fill"></div>';
-          if (i < currentIndex) bar.querySelector(".fill").style.width = "100%";
-          if (i > currentIndex) bar.querySelector(".fill").style.width = "0";
-          progressWrap.appendChild(bar);
-        });
+    buildProgressBars();
+    openPanel();
+    showImage(currentIndex);
+  });
+});
 
-        slidePanel.classList.add("open");
-        slidePanel.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-        showImage(currentIndex);
-      });
-    });
+function buildProgressBars() {
+  progressWrap.innerHTML = "";
+  images.forEach(() => {
+    const bar = document.createElement("div");
+    bar.className = "progress-bar";
+    bar.innerHTML = '<div class="fill"></div>';
+    progressWrap.appendChild(bar);
+  });
+}
 
-    function showImage(idx) {
-      statusImg.src = images[idx];
-      /* reset bars */
-      const bars = document.querySelectorAll(".progress-bar .fill");
-      bars.forEach((fill, i) => {
-        fill.style.animation = "none";
-        void fill.offsetHeight; /* force reflow */
-        if (i < idx) {
-          fill.style.width = "100%";
-        } else if (i === idx) {
-          fill.style.width = "0";
-          fill.style.animation = "statusFill 4s linear forwards";
-        } else {
-          fill.style.width = "0";
-        }
-      });
-      clearTimeout(timer);
-      timer = setTimeout(() => nextImage(), 4000);
+function openPanel() {
+  slidePanel.classList.add("open");
+  slidePanel.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closePanel() {
+  slidePanel.classList.remove("open");
+  slidePanel.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+  clearTimeout(timer);
+}
+
+function showImage(index) {
+  statusImg.src = images[index];
+
+  const fills = document.querySelectorAll(".progress-bar .fill");
+  fills.forEach((fill, i) => {
+    fill.style.animation = "none";
+    void fill.offsetHeight; // reflow
+    if (i < index) {
+      fill.style.width = "100%";
+    } else if (i === index) {
+      fill.style.width = "0";
+      fill.style.animation = "statusFill 4s linear forwards";
+    } else {
+      fill.style.width = "0";
     }
-    function nextImage() {
-      currentIndex++;
-      if (currentIndex >= images.length) {
-        closePanel();
-        return;
-      }
-      showImage(currentIndex);
-    }
+  });
 
-    /* click/tap to advance */
-    document
-      .getElementById("statusContainer")
-      .addEventListener("click", nextImage);
+  clearTimeout(timer);
+  timer = setTimeout(nextImage, 4000);
+}
+
+function nextImage() {
+  currentIndex++;
+  if (currentIndex >= images.length) {
+    closePanel();
+  } else {
+    showImage(currentIndex);
+  }
+}
+
+document.getElementById("statusContainer").addEventListener("click", nextImage);
+backBtn.addEventListener("click", closePanel);
+
 
     /* close */
     backBtn.addEventListener("click", closePanel);
@@ -1441,6 +1515,7 @@ subParents.forEach((parent) => {
     }
   });
 });
+
 
   </script>
 </body>
