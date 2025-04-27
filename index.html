@@ -1080,6 +1080,8 @@
   .slide-panel {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    background: #000;
     overflow-y: auto;
   }
 
@@ -1087,16 +1089,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     width: 100%;
     height: auto;
+    overflow: visible;
     padding: 1rem 0;
   }
 
   .progress-wrap {
     position: static;
-    margin-bottom: 0.5rem;
     width: 90%;
+    margin-bottom: 0.5rem;
   }
 
   .status-img {
@@ -1104,18 +1106,20 @@
     max-height: 65vh;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 
   .info-box {
+    position: static; /* Important: no absolute position */
     width: 90%;
     background: #fff;
     color: #000;
     border-radius: 8px;
     padding: 1rem;
+    margin-top: 1rem;
     max-height: 30vh;
     overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   .info-box h2 {
@@ -1129,6 +1133,7 @@
     margin-bottom: 0.5rem;
   }
 }
+
 
 
 
@@ -1421,7 +1426,7 @@
               <p id="infoDesc"></p>
               <p id="infoNarration"></p>
             </div>
-          </div>
+          </div>          
           
         
 
