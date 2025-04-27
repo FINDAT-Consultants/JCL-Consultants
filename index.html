@@ -1134,6 +1134,69 @@
   }
 }
 
+@media (max-width: 768px) {
+  /* Make mega menu overlays cover the full screen */
+  .mega-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #222;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    z-index: 300; /* higher than header */
+    display: none;
+  }
+
+  .mega-overlay.active {
+    display: block;
+  }
+
+  /* Move close button fully visible */
+  .mega-overlay .close-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    color: #fff;
+    z-index: 310;
+    cursor: pointer;
+  }
+
+  /* Ensure nav header does not block overlays */
+  header {
+    z-index: 200;
+  }
+
+  /* Adjust mega-inner for mobile */
+  .mega-inner {
+    flex-direction: column;
+    align-items: start;
+    padding-top: 4rem; /* So contents don't hide behind close button */
+  }
+
+  /* Shrink links in overlays for mobile */
+  .mega-col h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .mega-col ul {
+    font-size: 1rem;
+    line-height: 2;
+  }
+
+  /* Adjust Featured image inside overlay */
+  .mega-feature img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+}
+
 
 
 
