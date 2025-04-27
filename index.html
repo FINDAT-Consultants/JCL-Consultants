@@ -618,6 +618,36 @@
         padding: 3.5rem 1rem 2rem;
       }
     }
+
+    @media (max-width: 768px) {
+  footer .brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-size: 0.85rem; /* smaller font for mobile */
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  footer .brand img {
+    height: 40px; /* reduce logo size slightly */
+  }
+
+  footer .brand span {
+    font-size: 0.85rem; /* adjust "Jessin Consultancy Limited" size */
+    white-space: nowrap;
+  }
+
+  footer .copy {
+    font-size: 0.75rem; /* slightly smaller copyright text */
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+}
+
   </style>
 </head>
 
